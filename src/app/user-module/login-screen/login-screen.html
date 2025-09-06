@@ -13,9 +13,13 @@
     <h1 class="titulo">Login</h1>
   
     <input class="inpt" type="email" placeholder="insira o e-mail" formControlName="email">
+    <span *ngif="emailErrorMessage != '' " class="errorMessage">{{ emailErrorMessage }}</span>
     <input class="inpt" type="password" placeholder="insira a senha" formControlName="password">
+    <span *ngif="passwordErrorMessage != '' " class="errorMessage">{{ passwordErrorMessage }}</span>
 
     <button class="btn" (click)="onLoginClick()">Entrar</button>
+    
+    <span style="color: rebeccapurple;"> {{ errorLogin }}</span>
     
     </div>
 

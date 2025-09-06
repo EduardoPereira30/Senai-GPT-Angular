@@ -12,6 +12,11 @@ export class LoginScreen {
 
   loginForm: FormGroup;
 
+  emailErrorMessage: string;
+  passwordErrorMessage: string;
+  errorLogin:string;
+  
+
   constructor(private fb: FormBuilder) {
     // Quando a tela iniciar
 
@@ -22,6 +27,11 @@ export class LoginScreen {
 
     });
 
+    this.emailErrorMessage = "";
+    this.passwordErrorMessage = "";
+    this.errorLogin = "";
+    
+
   }
 
   async onLoginClick() {
@@ -29,25 +39,25 @@ export class LoginScreen {
     console.log("email", this.loginForm.value.email);
     console.log("password", this.loginForm.value.password);
 
-    if(this.loginForm.value.email == ""){
+    if (this.loginForm.value.email == "") {
 
-      alert("Preencha o e-mail")
+      this.emailErrorMessage = "O campo de email é obrigatorio";
       return;
     }
 
-    if(this.loginForm.value.password == ""){
+    if (this.loginForm.value.password == "") {
 
-      alert("Preencha a senha")
+      this.passwordErrorMessage = "O campo de senha é obrigatorio";
       return;
     }
 
     let response = await fetch("https://senai-gpt-api.azurewebsites.net/login", {
       method: "POST",
-      headers:{
-        "Content-Type" : "application/json"
+      headers: {
+        "Content-Type": "application/json"
 
       },
-      body: JSON.stringify( {
+      body: JSON.stringify({
         email: this.loginForm.value.email,
         password: this.loginForm.value.password
 
@@ -56,17 +66,17 @@ export class LoginScreen {
 
     console.log("STATUS CORE", response.status);
 
-    if( response.status >= 200 && response.status <= 299){
+    if (response.status >= 200 && response.status <= 299) {
 
-      alert("não a problema nenhum");
+      this.errorLogin = "login bem sucedido";
 
-    } else if ( response.status >= 400 && response.status <= 499){
+    } else if (response.status >= 400 && response.status <= 499) {
 
-      alert("Nome de usuario ou senha icorretos")
+      this.errorLogin = "Nome de usuario ou senha icorretos";
 
-    } else if (response.status >= 500 && response.status <= 599 ){
+    } else if (response.status >= 500 && response.status <= 599) {
 
-      alert("Erro no sistema");
+      this.errorLogin = "Erro no sistema";
 
     }
   }

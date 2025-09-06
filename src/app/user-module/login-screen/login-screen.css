@@ -67,3 +67,10 @@
     border-radius: 10px;         /*Define o arredondamento da borda           */
 
 }
+
+.errorMessage{
+color: red;
+font-size: 15px;
+transform: translateY(-10px) ;
+
+}

@@ -1,0 +1,166 @@
+.container {
+
+    display: flex;
+
+}
+
+.left-panel {
+
+    display: flex;
+    background-color: white;
+    height: 100vh;
+    width: 20vw;
+
+    justify-content: space-between;
+    flex-direction: column;
+
+}
+
+.central-panel {
+
+    background-color: white;
+    height: 100vh;
+    width: 80vw;
+    border-left: 1px solid #1c1c1c;
+
+}
+
+.top {
+
+    width: 100%;
+    min-height: 250px;
+    background-color: #FFFFFF;
+
+    padding: 8%;
+
+}
+
+.bottom {
+
+    width: 100%;
+    min-height: 250px;
+    padding: 8%;
+    border-top: 1px solid #1c1c1c;
+
+}
+
+.botão {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1c1c1c;
+    color: whitesmoke;
+    height: 15%;
+    width: 95%;
+    border-radius: 8px;
+
+}
+
+.bt {
+
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 35px;
+    background-color: #FFFFFF;
+    border: 0;
+    cursor: pointer;
+
+}
+
+.bt i{
+
+margin-left: 5px;
+
+}
+
+/********** MAIN **********/
+
+main img {
+
+    margin-top: auto;
+    margin-bottom: 30px;
+
+}
+
+.central-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    ;
+
+}
+
+.textos {
+
+    display: flex;
+    max-width: 70%;
+    align-items: center;
+
+}
+
+.textos p {
+
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+
+    margin-bottom: 16px;
+    border-radius: 8px;
+
+}
+
+.textos h3 {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.texto i {
+
+    margin-left: 45%;
+    margin-right: 50%;
+
+}
+
+
+.input-container {
+
+    margin-top: auto;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background-color: gainsboro;
+    border-radius: 16px;
+
+}
+
+.input-container input {
+
+    background-color: gainsboro;
+    border: none;
+    width: 400px;
+    outline: none;
+
+}
+
+.input-container i {
+
+    margin-right: 10px;
+
+}
+
+.send button {
+
+    color: grey;
+    margin-right: 0px;
+
+}
