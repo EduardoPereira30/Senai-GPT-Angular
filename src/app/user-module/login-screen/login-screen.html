@@ -1,26 +1,28 @@
-
-
 <main class="page-container"> <!-- CAiXA MAIOR -->
-  
-    <div class="robo-image">
-      
-    </div>
 
-    <div class="Login-container" [formGroup] = "loginForm">
+  <div class="robo-image">
 
-      <img src="/imgs/Chat.png" alt="Logo do SenaiGPT">
+  </div>
+
+  <div class="Login-container" [formGroup]="loginForm">
+
+    <img src="/imgs/Chat.png" alt="Logo do SenaiGPT">
 
     <h1 class="titulo">Login</h1>
-  
+
     <input class="inpt" type="email" placeholder="insira o e-mail" formControlName="email">
-    <span *ngif="emailErrorMessage != '' " class="errorMessage">{{ emailErrorMessage }}</span>
+    
+    <span  class="errorMessage">{{ emailErrorMessage }}</span>
+
     <input class="inpt" type="password" placeholder="insira a senha" formControlName="password">
-    <span *ngif="passwordErrorMessage != '' " class="errorMessage">{{ passwordErrorMessage }}</span>
+
+    <span  class="errorMessage">{{ passwordErrorMessage }}</span>
 
     <button class="btn" (click)="onLoginClick()">Entrar</button>
-    
-    <span style="color: rebeccapurple;"> {{ errorLogin }}</span>
-    
-    </div>
+
+    <span style="color: green;">{{ successStatusMessage }}</span>
+    <span style="color: red;">{{ errorStatusMessage }}</span>
+
+  </div>
 
 </main>

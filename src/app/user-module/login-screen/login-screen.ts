@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { concatAll, noop } from 'rxjs';
 
 @Component({
   selector: 'app-login-screen',
@@ -14,10 +14,11 @@ export class LoginScreen {
 
   emailErrorMessage: string;
   passwordErrorMessage: string;
-  errorLogin:string;
-  
+  successStatusMessage: string;
+  errorStatusMessage: string;
 
-  constructor(private fb: FormBuilder) {
+
+  constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) {
     // Quando a tela iniciar
 
     this.loginForm = this.fb.group({
@@ -29,12 +30,17 @@ export class LoginScreen {
 
     this.emailErrorMessage = "";
     this.passwordErrorMessage = "";
-    this.errorLogin = "";
-    
+    this.successStatusMessage = "";
+    this.errorStatusMessage = "";
 
   }
 
   async onLoginClick() {
+
+    this.emailErrorMessage = "";
+    this.passwordErrorMessage = "";
+    this.successStatusMessage = "";
+    this.errorStatusMessage = "";
 
     console.log("email", this.loginForm.value.email);
     console.log("password", this.loginForm.value.password);
@@ -68,17 +74,28 @@ export class LoginScreen {
 
     if (response.status >= 200 && response.status <= 299) {
 
-      this.errorLogin = "login bem sucedido";
+      this.successStatusMessage = "login bem sucedido";
+      let json = await response.json();
 
-    } else if (response.status >= 400 && response.status <= 499) {
+      console.log("JSON", json);
 
-      this.errorLogin = "Nome de usuario ou senha icorretos";
+      let meuToken = json.accessToken;
+      let userId = json.user.id;
 
-    } else if (response.status >= 500 && response.status <= 599) {
+      localStorage.setItem("meuToken", meuToken);
+      localStorage.setItem("meuId", userId);
 
-      this.errorLogin = "Erro no sistema";
+      window.location.href = "chat";
+
+
+    } else {
+
+      this.errorStatusMessage = "Nome de usuario ou senha icorretos";
 
     }
+
+    this.cd.detectChanges();
+
   }
 
 }

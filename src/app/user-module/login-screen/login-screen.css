@@ -15,8 +15,10 @@
     background-size: cover;
     background-position-y: -40px;
 
-    width: 50vw;   /* 50% da largura da tela*/
-    height: 100vh; /* 100% da altura da tela*/
+    width: 50vw;
+    /* 50% da largura da tela*/
+    height: 100vh;
+    /* 100% da altura da tela*/
 
 }
 
@@ -26,17 +28,23 @@
 
 }
 
-.Login-container{
+.Login-container {
 
-    width: 50vw;   /* 50% da largura da tela*/
-    height: 100vh; /* 100% da altura da tela*/
+    width: 50vw;
+    /* 50% da largura da tela*/
+    height: 100vh;
+    /* 100% da altura da tela*/
 
     /*Kit sobrevivencia da cetralização*/
 
-    display: flex;           /*Ativar o frex*/
-    flex-direction: column;  /*Muda o flex para colunas*/
-    align-items: center;     /*Centralizar horizontamente*/
-    justify-content: center; /*Centralizar verticalmente*/
+    display: flex;
+    /*Ativar o frex*/
+    flex-direction: column;
+    /*Muda o flex para colunas*/
+    align-items: center;
+    /*Centralizar horizontamente*/
+    justify-content: center;
+    /*Centralizar verticalmente*/
 
 }
 
@@ -48,29 +56,40 @@
 
 .inpt {
 
-    padding: 18px;               /*Marge interna                              */
-    background-color: #F7F9FB; /*Definea cor de fundo                       */
-    width: 377px;                /*Defini a largura                           */
-    border: 1px solid #ccc;    /*Define a borda                             */
-    border-radius: 10px;         /*Define o arredondamento da borda           */
-    margin-bottom: 16px;         /*Define a distancia de um botão para o outro*/ 
+    padding: 18px;
+    /*Marge interna                              */
+    background-color: #F7F9FB;
+    /*Definea cor de fundo                       */
+    width: 377px;
+    /*Defini a largura                           */
+    border: 1px solid #ccc;
+    /*Define a borda                             */
+    border-radius: 10px;
+    /*Define o arredondamento da borda           */
+    margin-bottom: 16px;
+    /*Define a distancia de um botão para o outro*/
 
 }
+
 
 .btn {
 
     cursor: pointer;
-    padding: 18px;               /*Marge interna                              */
-    background-color: #1C1C1C; /*Definea cor de fundo                       */
-    width: 377px;                /*Defini a largura                           */
+    padding: 18px;
+    /*Marge interna                              */
+    background-color: #1C1C1C;
+    /*Definea cor de fundo                       */
+    width: 377px;
+    /*Defini a largura                           */
     color: #fff;
-    border-radius: 10px;         /*Define o arredondamento da borda           */
+    border-radius: 10px;
+    /*Define o arredondamento da borda           */
 
 }
 
-.errorMessage{
-color: red;
-font-size: 15px;
-transform: translateY(-10px) ;
+.errorMessage {
+    color: red;
+    font-size: 15px;
+    transform: translateY(-10px);
 
 }

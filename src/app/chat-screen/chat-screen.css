@@ -22,6 +22,7 @@
     height: 100vh;
     width: 80vw;
     border-left: 1px solid #1c1c1c;
+    
 
 }
 
@@ -32,6 +33,9 @@
     background-color: #FFFFFF;
 
     padding: 8%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 
 }
 
@@ -41,6 +45,9 @@
     min-height: 250px;
     padding: 8%;
     border-top: 1px solid #1c1c1c;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 
 }
 
@@ -67,6 +74,7 @@
     background-color: #FFFFFF;
     border: 0;
     cursor: pointer;
+    gap: 3%;
 
 }
 
@@ -98,8 +106,10 @@ main img {
 
     display: flex;
     max-width: 70%;
-    align-items: center;
+}
+.textos  > div  {
 
+    margin: 0 1%;
 }
 
 .textos p {
@@ -112,10 +122,17 @@ main img {
     margin-bottom: 16px;
     border-radius: 8px;
 
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 55px;
+
 }
 
 .textos h3 {
 
+    margin-top: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
