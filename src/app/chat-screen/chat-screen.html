@@ -4,13 +4,10 @@
         <div class="top">
             <button class="botão"> <i class="fa-solid fa-plus"></i>New Chat</button>
 
-            <button class="bt"> <i class="fa-regular fa-message"></i> AI Chat Tool Ethics</button>
+            <button *ngFor = "let chat of chats" class="bt"> <i class="fa-regular fa-message"></i> {{chat.chatTitle}} </button>
 
-            <button class="bt"> <i class="fa-regular fa-message"></i> Al Chat Tool Impact Writing</button>
-
-            <button class="bt"> <i class="fa-regular fa-message"></i> New chat</button>
         </div>
-
+ 
         <div class="bottom">
             <button class="bt"> <i class="fa-regular fa-trash-can"></i> Clear conversations</button>
 

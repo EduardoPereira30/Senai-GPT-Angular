@@ -10,11 +10,11 @@ export const authGuard = () => {
 
     if (token != null && userId != null) {
 
-        localStorage.clear();
         return true;
 
     } else {
 
+        localStorage.clear();
         router.navigate(["/login"]);
         return false;
 
