@@ -22,7 +22,7 @@
     height: 100vh;
     width: 80vw;
     border-left: 1px solid #1c1c1c;
-    
+
 
 }
 
@@ -58,7 +58,7 @@
     justify-content: center;
     background-color: #1c1c1c;
     color: whitesmoke;
-    height: 15%;
+    height: 30px;
     width: 95%;
     border-radius: 8px;
 
@@ -70,7 +70,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    min-height: 35px;
+    min-height: 30px;
     background-color: #FFFFFF;
     border: 0;
     cursor: pointer;
@@ -78,9 +78,9 @@
 
 }
 
-.bt i{
+.bt i {
 
-margin-left: 5px;
+    margin-left: 5px;
 
 }
 
@@ -98,7 +98,7 @@ main img {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+
 
 }
 
@@ -107,7 +107,8 @@ main img {
     display: flex;
     max-width: 70%;
 }
-.textos  > div  {
+
+.textos>div {
 
     margin: 0 1%;
 }
