@@ -1,81 +1,103 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-user-screen',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './new-user-screen.html',
   styleUrl: './new-user-screen.css'
-
 })
-
 export class NewUserScreen {
 
-  NewUserForm: FormGroup;
+  newUserScreen: FormGroup;
 
-  emailErrorMessage: string;
-  passwordErrorMessage: string;
-  succesStatusMessage: string;
-  errorStatusMessage: string;
+  nameErrorMessege: string;
+  emailErrorMessege: string;
+  passwordErrorMessege: string;
+
 
   constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) {
-    // Quando a tela iniciar
+    //Quando a tela iniciar.
 
-    this.NewUserForm = this.fb.group({
+    //Inicia o formulario
+    //Cria o campo obrigatório de email.
+    //Cria o campo obrigatório de senha.
+    this.newUserScreen = this.fb.group({
 
-      email: ["", [Validators.required,Validators.email]],
-      password: ["", [Validators.required,Validators.minLength(6),Validators.pattern]],
-      name:["",[Validators.required]],
-      succesStatusMessage: ["", Validators.required]
+      email: ["", [Validators.required]],
+      password: ["", [Validators.required]],
+      name: ["", [Validators.required]],
 
     });
 
-    this.emailErrorMessage = "";
-    this.passwordErrorMessage = "";
-    this.succesStatusMessage = "";
-    this.errorStatusMessage = "";
+    this.nameErrorMessege = "";
+    this.emailErrorMessege = "";
+    this.passwordErrorMessege = "";
+
 
   }
 
-  async onNewClick() {
+  async onEnterClick() {
 
-    if(this.NewUserForm.value.email.includes("@") == false){
+    //alert("Botão de login clicado.");
+    this.nameErrorMessege = "";
+    this.emailErrorMessege = "";
+    this.passwordErrorMessege = "";
 
-      alert("email invalido");
-      return;
 
-    }
 
-    if(this.NewUserForm.invalid){
+    console.log("Name", this.nameErrorMessege);
+    console.log("Email", this.newUserScreen.value.email);
+    console.log("Password", this.newUserScreen.value.password);
 
-      alert("preencha todos os campos corretamente");
-      return;
-
-    }
-
-    // const(name,email,password,confirmPassword) =this.NewUserForm.value;
-
-    if (this.NewUserForm.value.confirmPassword == "") {
-
-      alert ("O campo de senha é obrigatorio");
+    if (this.newUserScreen.value.name == "") {
+      this.nameErrorMessege = "O Campo nome é obrigatório"
       return;
     }
+
+    if (this.newUserScreen.value.email == "") {
+      this.emailErrorMessege = "O Campo de e-mail é obrigatório."
+      return;
+    }
+
+    if (this.newUserScreen.value.password == "") {
+      this.passwordErrorMessege = "O Campo de Senha é obrigatório."
+      return;
+
+      //    } else if (this.newUserScreen.value.password.length <= 6){
+      //    this.passwordErrorMessege = ""
+    }
+
 
     let response = await fetch("https://senai-gpt-api.azurewebsites.net/users", {
-      method: "POST",
+      method: "POST", //ENVIAR,
       headers: {
         "Content-Type": "application/json"
-
       },
       body: JSON.stringify({
-        email: this.NewUserForm.value.email,
-        password: this.NewUserForm.value.password
-
+        name: this.newUserScreen.value.name,
+        email: this.newUserScreen.value.email,
+        password: this.newUserScreen.value.password,
       })
     });
 
-    console.log("STATUS CORE", response.status);
+    console.log("STATUS CODE", response.status)
+
+    if (response.status >= 200 && response.status <= 299) {
+
+      let json = await response.json();
+
+      console.log("JSON", json)
+
+      window.location.href = "login"
+
+
+    } else {
+      "Erro inseperado tente novamente mais tarde"
+
+      //alert("Acesso Negado")
+    }
+
+    this.cd.detectChanges();
   }
-
-
 }

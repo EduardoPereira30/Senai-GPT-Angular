@@ -6,21 +6,21 @@ import { NewUserScreen } from './user-module/new-user-screen/new-user-screen';
 
 export const routes: Routes = [
     {
-        path:"login",
-        loadComponent:() => LoginScreen
-    },{
+        path: "login",
+        loadComponent: () => LoginScreen
+    }, {
 
-        path:"",
-        loadComponent:() => LoginScreen
-    },{
+        path: "",
+        loadComponent: () => LoginScreen
+    }, {
 
-        path:"chat",
-        loadComponent:() => ChatScreen,
+        path: "chat",
+        loadComponent: () => ChatScreen,
         canActivate: [authGuard]
-    },{
+    }, {
 
-        path:"newUser",
-        loadComponent:() => NewUserScreen
+        path: "newUser",
+        loadComponent: () => NewUserScreen
 
     }
 ];

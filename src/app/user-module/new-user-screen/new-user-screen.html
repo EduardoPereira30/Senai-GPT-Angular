@@ -1,28 +1,28 @@
-<!-- <main class="page-container"> CAiXA MAIOR -->
+<main class="page-container"> <!--CAiXA MAIOR-->
 
-    <!-- <div class="robo-image">
-  
-    </div>
-  
-    <div class="Login-container" [formGroup]="NewForm" >
-  
-      <img src="/imgs/Chat.png" alt="Logo do SenaiGPT">
-  
-      <h1 class="titulo">Novo usuário</h1>
-  
-      <input class="inpt" type="name" placeholder="insira o nome de usuario" formControlName="name">
-      
-      <input class="inpt" type="email" placeholder="insira o email" formControlName="email">
+  <div class="robo-image">
 
-      <input class="inpt" type="password" placeholder="insira a senha" formControlName="password">
-      
-      <input class="inpt" type="password" placeholder="confirme a senha" formControlName="password">
-    
-      <button class="btn" (click)="onNewClick()">Entrar</button>
+  </div>
 
-      <a href="">Click aqui para fazer login</a>
-  
-  
-    </div>
-  
-  </main> -->
+  <div class="Login-container" [formGroup]="newUserScreen">
+
+    <img src="/imgs/Chat.png" alt="Logo do SenaiGPT">
+
+    <h1 class="titulo">Novo usuário</h1>
+
+    <input class="inpt" type="name" placeholder="insira o nome de usuario" formControlName="name">
+
+    <input class="inpt" type="email" placeholder="insira o email" formControlName="email">
+
+    <input class="inpt" type="password" placeholder="insira a senha" formControlName="password">
+
+    <input class="inpt" type="password" placeholder="confirme a senha" formControlName="password">
+
+    <button class="btn" (click)="onEnterClick()">Entrar</button>
+
+    <a href="">Click aqui para fazer login</a>
+
+
+  </div>
+
+</main>

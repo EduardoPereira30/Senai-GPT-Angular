@@ -5,22 +5,22 @@ import { routes } from './app.routes';
 import { HttpErrorResponse, HttpInterceptorFn, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 
-export const authInterceptor: HttpInterceptorFn = (req,next) => {
+export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
-    const router = inject(Router)
+  const router = inject(Router)
 
-    return next(req).pipe(
-      catchError((err: HttpErrorResponse) =>{
+  return next(req).pipe(
+    catchError((err: HttpErrorResponse) => {
 
-        if(err.status == 401){
+      if (err.status == 401) {
 
-         localStorage.clear()
-         router.navigate(["/login"])
-
-        }
-       return throwError(() => err);
+        localStorage.clear()
+        router.navigate(["/login"])
 
       }
+      return throwError(() => err);
+
+    }
 
     ));
 
@@ -29,8 +29,7 @@ export const authInterceptor: HttpInterceptorFn = (req,next) => {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(
-      withInterceptors([ authInterceptor ])
-    ),
+      withInterceptors([authInterceptor])),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes)
