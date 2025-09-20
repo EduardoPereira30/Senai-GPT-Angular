@@ -4,21 +4,26 @@
 
   </div>
 
-  <div class="Login-container" [formGroup]="newUserScreen">
+  <div class="Login-container" [formGroup]="newUserForm">
 
     <img src="/imgs/Chat.png" alt="Logo do SenaiGPT">
 
     <h1 class="titulo">Novo usuário</h1>
 
     <input class="inpt" type="name" placeholder="insira o nome de usuario" formControlName="name">
+    <span class="errorMessage">{{errorName}} </span>
 
     <input class="inpt" type="email" placeholder="insira o email" formControlName="email">
+    <span class="errorMessage">{{emailErrorMessage}} </span>
+
 
     <input class="inpt" type="password" placeholder="insira a senha" formControlName="password">
 
     <input class="inpt" type="password" placeholder="confirme a senha" formControlName="password">
+    <span class="errorMessage">{{passwordErrorMessage}} </span>
 
-    <button class="btn" (click)="onEnterClick()">Entrar</button>
+
+    <button class="btn" (click)="enter()">Entrar</button>
 
     <a href="">Click aqui para fazer login</a>
 

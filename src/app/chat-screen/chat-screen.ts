@@ -34,7 +34,7 @@ export class ChatScreen {
   menssagens: IMenssage[];
   mensagemUsuario = new FormControl("");
 
-  constructor(private htpp: HttpClient, private cd: ChangeDetectorRef) {
+  constructor(private http: HttpClient, private cd: ChangeDetectorRef) {
     //inicialização de variaveis
 
     this.chats = [];
@@ -58,17 +58,23 @@ export class ChatScreen {
     //   }
     // }).toPromise();
 
-    let response = await firstValueFrom(this.htpp.get(" https://senai-gpt-api.azurewebsites.net/chats", {
+    let response = await firstValueFrom(this.http.get(" https://senai-gpt-api.azurewebsites.net/chats", {
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("meuToken")
       }
     }
-    ));
+    )) as IChat[];
 
 
-    console.log("Chats", response);
 
     if (response) {
+
+      console.log("Chats", response);
+
+
+      let userId = localStorage.getItem("meuId");
+
+      response = response.filter(chat => chat.userId == userId);
 
       this.chats = response as [];
 
@@ -88,7 +94,7 @@ export class ChatScreen {
     this.chatSelecionado = chatClicado;
 
     //logica para buscar as mensagens.
-    let response = await firstValueFrom(this.htpp.get(" https://senai-gpt-api.azurewebsites.net/messages?chatId=" + chatClicado.id, {
+    let response = await firstValueFrom(this.http.get(" https://senai-gpt-api.azurewebsites.net/messages?chatId=" + chatClicado.id, {
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("meuToken")
       }
@@ -110,9 +116,9 @@ export class ChatScreen {
 
     };
 
-    let novaMessagenUsuarioresponse = await firstValueFrom(this.htpp.post(" https://senai-gpt-api.azurewebsites.net/messages", novaMessagenUsuario, {
+    let novaMessagenUsuarioresponse = await firstValueFrom(this.http.post(" https://senai-gpt-api.azurewebsites.net/messages", novaMessagenUsuario, {
       headers: {
-        "Content-Type": "Application/json",
+        "Content-Type": "application/json",
         "Authorization": "Bearer " + localStorage.getItem("meuToken")
       }
     }
@@ -122,41 +128,74 @@ export class ChatScreen {
 
     // 2- enveiar mensagen do usuario para IA responder
 
-    let respostaIARespose = await firstValueFrom(this.htpp.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent", {
-      "contents": {
-
-        "parts": [
-          {
-            "text": this.mensagemUsuario.value + "me de uma resposta objetiva"
-          }
-        ]
-      }
-
+    let respostaIARespose = await firstValueFrom(this.http.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent", {
+      "contents": [
+        {
+          "parts": [
+            {
+              "text": this.mensagemUsuario.value + ".Me de uma resposta objetiva"
+            }
+          ]
+        }
+      ]
     }, {
       headers: {
         "Content-Type": "application/json",
-        "X-gong-api-key": "AIzaSyDV2HECQZLpWJrqCKEbuq7TT5QPKKdLOdo"
+        "X-goog-api-key": "AIzaSyDV2HECQZLpWJrqCKEbuq7TT5QPKKdLOdo"
 
       }
     })) as any;
 
     let novaRespostaIA = {
       chatId: this.chatSelecionado.id,
-      userId: "chat-bot",
-      Text: respostaIARespose.candidates[0].Content.parts[0].text
+      userId: "chatbot",
+      text: respostaIARespose.candidates[0].content.parts[0].text
     }
 
-    let novaRespostaIAResponse = await firstValueFrom(this.htpp.post("https://senai-gpt-api.azurewebsites.net/messages", {
+    let novaRespostaIAResponse = await firstValueFrom(this.http.post("https://senai-gpt-api.azurewebsites.net/messages&quot", novaRespostaIA, {
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + localStorage.getItem("meuToken")
-
-
       }
     }));
 
     await this.onChatClick(this.chatSelecionado);
 
 
+  }
+
+  async novoChat() {
+
+    const nomeChat = prompt("Digite o nome do novo chat")
+
+    if (!nomeChat) {
+      alert("Nome invalido");
+      return;
+    }
+
+    const novoChatObj = {
+      chatTitle: nomeChat,
+      userId: localStorage.getItem("meuId")
+
+
+    }
+
+    let novoChatResponse = await firstValueFrom(this.http.post(" https://senai-gpt-api.azurewebsites.net/chats", novoChatObj, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("meuToken")
+      }
+    })) as IChat;
+    await this.getChats();
+
+    await this.onChatClick(novoChatResponse)
+  }
+
+  deslogar() {
+
+    localStorage.removeItem("meuToken");
+    localStorage.removeItem("userId");
+
+    window.location.href = "/login";
   }
 }

@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-user-screen',
@@ -7,97 +9,105 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   templateUrl: './new-user-screen.html',
   styleUrl: './new-user-screen.css'
 })
+
 export class NewUserScreen {
 
-  newUserScreen: FormGroup;
+  newUserForm: FormGroup;
 
-  nameErrorMessege: string;
-  emailErrorMessege: string;
-  passwordErrorMessege: string;
+  errorName: string;
+  emailErrorMessage: string;
+  passwordErrorMessage: string;
+  successStatusMessage: string;
+  errorStatusMessage: string;
 
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router
 
-  constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) {
-    //Quando a tela iniciar.
+  ) {
 
-    //Inicia o formulario
-    //Cria o campo obrigatório de email.
-    //Cria o campo obrigatório de senha.
-    this.newUserScreen = this.fb.group({
+    // quando a tela iniciar.
 
-      email: ["", [Validators.required]],
-      password: ["", [Validators.required]],
-      name: ["", [Validators.required]],
+    // inicia o formulario.
+    this.newUserForm = this.fb.group({
 
+      Name: ["", [Validators.required]],
+      Email: ["", [Validators.required, Validators.email]],//campo de email obrigatorio.
+      Password: ["", [Validators.required]],//campo obrigatorio de senha.
+      confirmPassword: ["", [Validators.required]],
     });
-
-    this.nameErrorMessege = "";
-    this.emailErrorMessege = "";
-    this.passwordErrorMessege = "";
-
-
+    this.errorName = "";
+    this.emailErrorMessage = "";
+    this.passwordErrorMessage = "";
+    this.successStatusMessage = "";
+    this.errorStatusMessage = "";
   }
 
-  async onEnterClick() {
+  async enter() {
 
-    //alert("Botão de login clicado.");
-    this.nameErrorMessege = "";
-    this.emailErrorMessege = "";
-    this.passwordErrorMessege = "";
+    this.errorName = "";
+    this.emailErrorMessage = "";
+    this.passwordErrorMessage = "";
+    this.successStatusMessage = "";
+    this.errorStatusMessage = "";
 
+    console.log("Name", this.newUserForm.value.Name);
+    console.log("Email", this.newUserForm.value.Email);
+    console.log("Password", this.newUserForm.value.Password);
 
+    if (this.newUserForm.value.Name == "") {
 
-    console.log("Name", this.nameErrorMessege);
-    console.log("Email", this.newUserScreen.value.email);
-    console.log("Password", this.newUserScreen.value.password);
-
-    if (this.newUserScreen.value.name == "") {
-      this.nameErrorMessege = "O Campo nome é obrigatório"
+      this.errorName = "Digite o nome do usuario.";
       return;
     }
 
-    if (this.newUserScreen.value.email == "") {
-      this.emailErrorMessege = "O Campo de e-mail é obrigatório."
+    if (this.newUserForm.value.Email == "") {
+
+      this.emailErrorMessage = "Preecha o email.";
       return;
     }
+    if (this.newUserForm.value.Password !== this.newUserForm.value.confirmPassword) {
 
-    if (this.newUserScreen.value.password == "") {
-      this.passwordErrorMessege = "O Campo de Senha é obrigatório."
+      this.passwordErrorMessage = "Senhas não corresponden.";
       return;
 
-      //    } else if (this.newUserScreen.value.password.length <= 6){
-      //    this.passwordErrorMessege = ""
     }
-
 
     let response = await fetch("https://senai-gpt-api.azurewebsites.net/users", {
-      method: "POST", //ENVIAR,
+      method: "POST", //enviar
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        name: this.newUserScreen.value.name,
-        email: this.newUserScreen.value.email,
-        password: this.newUserScreen.value.password,
+        user: this.newUserForm.value.Name,
+        email: this.newUserForm.value.Email,
+        password: this.newUserForm.value.Password
       })
     });
 
-    console.log("STATUS CODE", response.status)
-
     if (response.status >= 200 && response.status <= 299) {
 
+      this.successStatusMessage = "Conta criada com suscesso.";
+
       let json = await response.json();
+      console.log("JSON", json);
 
-      console.log("JSON", json)
+      let meuToken = json.accessToken;
+      let userId = json.user.id;
 
-      window.location.href = "login"
+      localStorage.setItem("meuToken", meuToken)
 
+      localStorage.setItem("meuId", userId)
 
-    } else {
-      "Erro inseperado tente novamente mais tarde"
+      this.newUserForm.value.email = "";
 
-      //alert("Acesso Negado")
+      window.location.href = "users";
+
     }
 
-    this.cd.detectChanges();
+    //  this.cd.detectChanges();
+
+
   }
 }
