@@ -102,7 +102,7 @@ export class NewUserScreen {
 
       this.newUserForm.value.email = "";
 
-      window.location.href = "users";
+      window.location.href = "login";
 
     }
 

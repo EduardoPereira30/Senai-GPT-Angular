@@ -19,7 +19,7 @@ export const routes: Routes = [
         canActivate: [authGuard]
     }, {
 
-        path: "newUser",
+        path: "Users",
         loadComponent: () => NewUserScreen
 
     }

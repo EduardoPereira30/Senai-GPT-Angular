@@ -27,12 +27,14 @@ interface IMenssage {
   templateUrl: './chat-screen.html',
   styleUrl: './chat-screen.css'
 })
+
 export class ChatScreen {
 
   chats: IChat[];
   chatSelecionado: IChat;
   menssagens: IMenssage[];
   mensagemUsuario = new FormControl("");
+  darkMode: boolean = false;
 
   constructor(private http: HttpClient, private cd: ChangeDetectorRef) {
     //inicialização de variaveis
@@ -46,6 +48,14 @@ export class ChatScreen {
     //buscar dados da api
 
     this.getChats();
+
+    let darkModeLocalStorage = localStorage.getItem("darkMode");
+
+    if (darkModeLocalStorage == "true") {
+
+      this.darkMode = true;
+      document.body.classList.toggle("darkmode", this.darkMode)
+    }
 
   }
 
@@ -196,6 +206,15 @@ export class ChatScreen {
     localStorage.removeItem("meuToken");
     localStorage.removeItem("userId");
 
-    window.location.href = "/login";
+    window.location.href = "login";
+  }
+
+  LigarDesligarDarkMode() {
+
+    this.darkMode = !this.darkMode;
+
+    document.body.classList.toggle("dark Mode", this.darkMode);
+
+    localStorage.setItem("darkMode", this.darkMode.toString());
   }
 }

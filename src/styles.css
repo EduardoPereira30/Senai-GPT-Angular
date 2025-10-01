@@ -2,11 +2,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 
-* {/* Quer disser todos os elementos */
+* {
+    /* Quer disser todos os elementos */
 
-    padding: 0%;             /*Margem interna*/
-    margin: 0%;              /*Margem externa*/
-    box-sizing: border-box;  /*Muda a estrutura de espaçamentos*/ 
+    padding: 0%;
+    /*Margem interna*/
+    margin: 0%;
+    /*Margem externa*/
+    box-sizing: border-box;
+    /*Muda a estrutura de espaçamentos*/
     font-family: "Inter";
 
 }

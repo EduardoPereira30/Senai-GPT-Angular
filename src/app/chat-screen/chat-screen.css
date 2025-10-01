@@ -4,10 +4,10 @@
 
 }
 
+
 .left-panel {
 
     display: flex;
-    background-color: white;
     height: 100vh;
     width: 20vw;
 
@@ -18,7 +18,6 @@
 
 .central-panel {
 
-    background-color: white;
     height: 100vh;
     width: 80vw;
     border-left: 1px solid #1c1c1c;
@@ -30,13 +29,17 @@
 
     width: 100%;
     min-height: 250px;
-    background-color: #FFFFFF;
 
     padding: 8%;
     display: flex;
     flex-direction: column;
     gap: 10px;
     overflow-y: scroll;
+
+}
+
+.top::-webkit-scrollbar {
+    height: 0px;
 
 }
 
@@ -165,10 +168,10 @@ main img {
 
 .input-container input {
 
-    background-color: gainsboro;
     border: none;
     width: 400px;
     outline: none;
+    background-color: transparent;
 
 }
 
@@ -236,5 +239,46 @@ main img {
     margin-left: unset;
     color: white;
     background: #000;
+
+}
+
+::ng-deep body.darkMode .left-panel {
+    background-color: #000 !important;
+
+}
+
+::ng-deep body.darkMode .bt {
+    background-color: #000 !important;
+    color: #FFFFFF;
+
+}
+
+::ng-deep body.darkMode .botão {
+    background-color: #C6C7F8 !important;
+    color: black;
+
+}
+
+::ng-deep body.darkMode .central-panel {
+    background-color: black !important;
+    color: white;
+
+}
+
+::ng-deep body.darkMode .input-container {
+    color: white;
+    background-color: #1c1c1c;
+
+}
+
+::ng-deep body.darkMode .chat-container .message-item.chatbot {
+    color: white;
+    background-color: #1c1c1c !important;
+
+}
+
+::ng-deep body.darkMode .chat-container .message-item {
+    color: black;
+    background-color: grey !important;
 
 }

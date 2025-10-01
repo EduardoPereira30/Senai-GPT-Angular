@@ -17,13 +17,13 @@
 
         <div class="bottom">
 
-            <button class="bt"> <i class="fa-regular fa-trash-can"></i> Clear conversations</button>
+            <!-- <button class="bt"> <i class="fa-regular fa-trash-can"></i> Clear conversations</button> -->
 
-            <button class="bt"> <i class="fa-solid fa-sun"></i> Light mode</button>
-
+            <button class="bt" (click)="LigarDesligarDarkMode()"> <i class="fa-solid fa-moon"></i> Back mode</button>
+            <!-- 
             <button class="bt"> <i class="fa-regular fa-circle-user"></i> My account</button>
 
-            <button class="bt"> <i class="fa-regular fa-share-from-square"></i>Updates & FAQ</button>
+            <button class="bt"> <i class="fa-regular fa-share-from-square"></i>Updates & FAQ</button> -->
 
             <button class="bt"> <i class="fa-solid fa-door-closed" (click)="deslogar()"></i> Log out</button>
         </div>
@@ -33,7 +33,7 @@
 
         @if (chatSelecionado == null){
 
-        <img src="imgs/Chat.png" alt="logo">
+        <img [src]=" darkMode == true? 'imgs/Chat-darkmode.png' : 'imgs/Chat.png' ">
 
         <div class="textos">
 
@@ -90,7 +90,7 @@
 
             <i class="fa-solid fa-microphone"></i>
 
-            <input type="text" placeholder="type mensagge" [formControl]="mensagemUsuario">
+            <input type="text" placeholder="type mensagge" [formControl]="mensagemUsuario" (keydown.enter)="ngOnInit()">
 
             <i (click)="enviarMenssagen()" class=" send button fa-solid fa-paper-plane"></i>
 

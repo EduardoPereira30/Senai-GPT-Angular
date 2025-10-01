@@ -60,7 +60,7 @@ export class LoginScreen {
     let response = await fetch("https://senai-gpt-api.azurewebsites.net/login", {
       method: "POST",
       headers: {
-        "Content-Type":"application/json"
+        "Content-Type": "application/json"
 
       },
       body: JSON.stringify({
